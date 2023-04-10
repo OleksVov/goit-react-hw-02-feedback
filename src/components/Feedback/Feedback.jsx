@@ -36,6 +36,9 @@ class Feedback extends Component {
 const goodFeedback = this.state.good;
 const neutralFeedback = this.state.neutral;
 const badFeedback = this.state.bad;
+const total = goodFeedback + neutralFeedback + badFeedback;
+
+const positiveFeedback = total > 0 ? Math.round(goodFeedback * 100 / total) : 0;
 
 
         return (
@@ -48,10 +51,11 @@ const badFeedback = this.state.bad;
                 </div>
                 <h2>Statistics</h2>
                 <ul>
-                    <li>Good:{this.state.good}</li>
-                    <li>Neutral:{this.state.neutral}</li>
-                    <li>Bad:{this.state.bad}</li>
-                    <li>Total:{goodFeedback + neutralFeedback + badFeedback}</li>
+                    <li>Good: {this.state.good}</li>
+                    <li>Neutral: {this.state.neutral}</li>
+                    <li>Bad: {this.state.bad}</li>
+                    <li>Total: {total}</li>
+                    <li>Positive feedback: {positiveFeedback}%</li>
                     </ul>
             </div>
         )
