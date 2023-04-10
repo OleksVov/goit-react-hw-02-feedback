@@ -51,7 +51,7 @@ const badFeedback = this.state.bad;
                     <li>Good:{this.state.good}</li>
                     <li>Neutral:{this.state.neutral}</li>
                     <li>Bad:{this.state.bad}</li>
-                    <li>{goodFeedback + neutralFeedback}</li>
+                    <li>Total:{goodFeedback + neutralFeedback + badFeedback}</li>
                     </ul>
             </div>
         )
