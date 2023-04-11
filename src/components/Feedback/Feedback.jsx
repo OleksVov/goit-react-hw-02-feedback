@@ -30,7 +30,11 @@ class Feedback extends Component {
         
       }
 
-      countTotalFeedback = () => {}
+      countTotalFeedback = (e) => {
+       return e;
+       
+      }
+
       
       render() {
 const goodFeedback = this.state.good;
@@ -56,6 +60,7 @@ const positiveFeedback = total > 0 ? Math.round(goodFeedback * 100 / total) : 0;
                     <li>Bad: {this.state.bad}</li>
                     <li>Total: {total}</li>
                     <li>Positive feedback: {positiveFeedback}%</li>
+                    <li>P: {this.countTotalFeedback(total)}</li>
                     </ul>
             </div>
         )
