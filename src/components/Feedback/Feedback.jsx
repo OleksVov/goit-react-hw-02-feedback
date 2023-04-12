@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
+import FeedbackOptions from './FeedbackOptions';
+import Statistics from './Statistics';
+import Section from './Section';
+
 // import PropTypes from 'prop-types';
-import css from './Feedback.module.css';
+
 
 class Feedback extends Component {
     state = {
@@ -14,54 +18,46 @@ class Feedback extends Component {
         }));
       }
       handleIncrementNeutral = () => {
-        this.setState(prevState => {
-            return {
-                neutral: prevState.neutral + 1,
-            };
-        });
+        this.setState(prevState => ({neutral: prevState.neutral + 1,
+        }));
       }
       handleIncrementBad = () => {
-        this.setState(prevState => {
-            return {
-                bad: prevState.bad + 1,
-            };
-           
-        });
-        
+        this.setState(prevState => ({bad: prevState.bad + 1,
+        }));
       }
 
-      countTotalFeedback = (e) => {
-       return e;
-       
+      countTotalFeedback = (a, b, c) => {
+       const total = a + b + c;
+        return total;
+      }
+
+      countPositiveFeedbackPercentage = (a, b, c) => {
+         const total = a + b + c;
+        return total > 0 ? Math.round(a * 100 / total) : 0;
       }
 
       
       render() {
-const goodFeedback = this.state.good;
-const neutralFeedback = this.state.neutral;
-const badFeedback = this.state.bad;
-const total = goodFeedback + neutralFeedback + badFeedback;
-
-const positiveFeedback = total > 0 ? Math.round(goodFeedback * 100 / total) : 0;
-
+const {good} = this.state;
+const {neutral} = this.state;
+const {bad} = this.state;
 
         return (
             <div>
-                <h1>Please leave feedback</h1>
-                <div className={css.boxButton}>
-                    <button type='button' onClick={this.handleIncrementGood}>Good</button>
-                    <button type='button' onClick={this.handleIncrementNeutral}>Neutral</button>
-                    <button type='button' onClick={this.handleIncrementBad}>Bad</button>
-                </div>
-                <h2>Statistics</h2>
-                <ul>
-                    <li>Good: {this.state.good}</li>
-                    <li>Neutral: {this.state.neutral}</li>
-                    <li>Bad: {this.state.bad}</li>
-                    <li>Total: {total}</li>
-                    <li>Positive feedback: {positiveFeedback}%</li>
-                    <li>P: {this.countTotalFeedback(total)}</li>
-                    </ul>
+              <Section title="Please leave feedback">
+        
+                <FeedbackOptions
+                onIncrementGood={this.handleIncrementGood}
+                onIncrementNeutral={this.handleIncrementNeutral}
+                onIncrementBad={this.handleIncrementBad} />
+              <h2>Statistics</h2>
+                <Statistics
+                good={good}
+                neutral={neutral}
+                bad={bad}
+                onTotalFeedback={this.countTotalFeedback(good, neutral, bad)}
+                onPositiveFeedbackPercentage={this.countPositiveFeedbackPercentage(good, neutral, bad)}/>
+              </Section>
             </div>
         )
       }
