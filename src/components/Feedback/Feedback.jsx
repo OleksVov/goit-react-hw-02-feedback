@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
 import Section from './Section';
+import Notification from './Notification';
 
 // import PropTypes from 'prop-types';
 
@@ -51,12 +52,18 @@ const {bad} = this.state;
                 onIncrementNeutral={this.handleIncrementNeutral}
                 onIncrementBad={this.handleIncrementBad} />
               <h2>Statistics</h2>
+
+              {this.countTotalFeedback(good, neutral, bad) > 0 ? (
                 <Statistics
                 good={good}
                 neutral={neutral}
                 bad={bad}
                 onTotalFeedback={this.countTotalFeedback(good, neutral, bad)}
                 onPositiveFeedbackPercentage={this.countPositiveFeedbackPercentage(good, neutral, bad)}/>
+              ) : (
+                <Notification message="There is no feedback"/>
+              )}
+               
               </Section>
             </div>
         )
