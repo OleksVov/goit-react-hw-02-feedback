@@ -1,13 +1,19 @@
 import React from "react";
 import css from './FeedbackOption.module.css';
 
-const FeedbackOptions = ({onIncrementGood,onIncrementNeutral,onIncrementBad}) => (
-    <div className={css.boxButton}>
-                    <button type='button' onClick={onIncrementGood}>Good</button>
-                    <button type='button' onClick={onIncrementNeutral}>Neutral</button>
-                    <button type='button' onClick={onIncrementBad}>Bad</button>
-                </div>
-);
+const FeedbackOptions = ({options, onLeaveFeedback}) => {
+    return (
+        <div className={css.boxButton}>
+            {options.map(option => (
+               <button 
+               type='button' 
+               key={option} 
+               onClick={onLeaveFeedback}
+               >{option}</button> 
+            ))}
+        </div>
+    );
+};
     
 
 export default FeedbackOptions;
